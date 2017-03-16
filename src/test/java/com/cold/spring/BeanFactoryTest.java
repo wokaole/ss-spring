@@ -1,6 +1,5 @@
 package com.cold.spring;
 
-import com.cold.spring.factory.AbstractBeanFactory;
 import com.cold.spring.factory.AutowireCapableBeanFactory;
 import com.cold.spring.factory.BeanFactory;
 import junit.framework.TestCase;
