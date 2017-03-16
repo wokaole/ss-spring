@@ -1,5 +1,8 @@
 package com.cold.spring;
 
+import com.cold.spring.factory.AbstractBeanFactory;
+import com.cold.spring.factory.AutowireCapableBeanFactory;
+import com.cold.spring.factory.BeanFactory;
 import junit.framework.TestCase;
 
 /**
@@ -8,9 +11,15 @@ import junit.framework.TestCase;
 public class BeanFactoryTest extends TestCase {
 
     public void testGetBean() throws Exception {
-        BeanDefinition beanDefinition = new BeanDefinition(new HelloService());
-        BeanFactory beanFactory = new BeanFactory();
+        // 1.初始化beanfactory
+        BeanFactory beanFactory = new AutowireCapableBeanFactory();
+        BeanDefinition beanDefinition = new BeanDefinition();
+        beanDefinition.setBeanClassName("com.cold.spring.HelloService");
+
+        //注入bean
         beanFactory.registerBeanDefinition("helloService", beanDefinition);
+
+        //获取bean
         HelloService helloService = (HelloService) beanFactory.getBean("helloService");
         helloService.hello();
     }
