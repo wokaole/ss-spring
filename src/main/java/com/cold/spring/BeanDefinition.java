@@ -1,6 +1,8 @@
 package com.cold.spring;
 
 /**
+ * bean的内容及元数据，保存在BeanFactory中
+ * 包括bean的名称、属性、方法等属性
  * Created by faker on 2017/3/15.
  */
 public class BeanDefinition {
@@ -11,7 +13,7 @@ public class BeanDefinition {
 
     private Class beanClass;
 
-    private PropertyValues propertyValues;
+    private PropertyValues propertyValues = new PropertyValues();
 
     public BeanDefinition() {
     }

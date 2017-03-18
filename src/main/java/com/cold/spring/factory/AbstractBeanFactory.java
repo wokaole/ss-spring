@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
+ * 规范了 IoC 容器的基本结构，把生成 Bean 的具体实现方式留给子类实现。
  * Created by faker on 2017/3/15.
  */
 public abstract class AbstractBeanFactory implements BeanFactory {
