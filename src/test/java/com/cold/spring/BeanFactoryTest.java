@@ -10,10 +10,16 @@ import junit.framework.TestCase;
 public class BeanFactoryTest extends TestCase {
 
     public void testGetBean() throws Exception {
-        // 1.初始化beanfactory
+        // 1.初始化beanFactory
         BeanFactory beanFactory = new AutowireCapableBeanFactory();
         BeanDefinition beanDefinition = new BeanDefinition();
         beanDefinition.setBeanClassName("com.cold.spring.HelloService");
+
+        //注入属性
+        PropertyValue value = new PropertyValue("text", "hello world!");
+        PropertyValues propertyValues = new PropertyValues();
+        propertyValues.addPropertyValue(value);
+        beanDefinition.setPropertyValues(propertyValues);
 
         //注入bean
         beanFactory.registerBeanDefinition("helloService", beanDefinition);

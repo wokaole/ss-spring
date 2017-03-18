@@ -5,8 +5,18 @@ package com.cold.spring;
  */
 public class HelloService {
 
+    private String text;
+
     public void hello() {
-        System.out.println("hello");
+        System.out.println(text);
     }
 
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
 }
