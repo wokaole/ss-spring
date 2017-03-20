@@ -1,10 +1,11 @@
 package com.cold.spring;
 
+import com.cold.spring.factory.AbstractBeanFactory;
 import com.cold.spring.factory.AutowireCapableBeanFactory;
-import com.cold.spring.factory.BeanFactory;
 import com.cold.spring.io.URLResourceLoader;
 import com.cold.spring.xml.XmlBeanDefinitionReader;
 import junit.framework.TestCase;
+import org.junit.Test;
 
 import java.util.Map;
 
@@ -13,20 +14,41 @@ import java.util.Map;
  */
 public class BeanFactoryTest extends TestCase {
 
-    public void testGetBean() throws Exception {
+    @Test
+    public void testLazy() throws Exception {
+        // 1.读取配置
+        XmlBeanDefinitionReader xmlBeanDefinitionReader = new XmlBeanDefinitionReader(new URLResourceLoader());
+        xmlBeanDefinitionReader.loadBeanDefinitions("bean.xml");
 
-        XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(new URLResourceLoader());
-        reader.loadBeanDefinitions("bean.xml");
-
-        BeanFactory beanFactory = new AutowireCapableBeanFactory();
-
-        for (Map.Entry<String, BeanDefinition> entry: reader.getRegister().entrySet()) {
-            beanFactory.registerBeanDefinition(entry.getKey(), entry.getValue());
+        // 2.初始化BeanFactory并注册bean
+        AbstractBeanFactory beanFactory = new AutowireCapableBeanFactory();
+        for (Map.Entry<String, BeanDefinition> beanDefinitionEntry : xmlBeanDefinitionReader.getRegister().entrySet()) {
+            beanFactory.registerBeanDefinition(beanDefinitionEntry.getKey(), beanDefinitionEntry.getValue());
         }
 
-        //获取bean
-        HelloService helloService = (HelloService) beanFactory.getBean("helloService");
-        helloService.hello();
+        // 3.获取bean
+        HelloService helloWorldService = (HelloService) beanFactory.getBean("helloService");
+        helloWorldService.helloWorld();
+    }
+
+    @Test
+    public void testPreInstantiate() throws Exception {
+        // 1.读取配置
+        XmlBeanDefinitionReader xmlBeanDefinitionReader = new XmlBeanDefinitionReader(new URLResourceLoader());
+        xmlBeanDefinitionReader.loadBeanDefinitions("bean.xml");
+
+        // 2.初始化BeanFactory并注册bean
+        AbstractBeanFactory beanFactory = new AutowireCapableBeanFactory();
+        for (Map.Entry<String, BeanDefinition> beanDefinitionEntry : xmlBeanDefinitionReader.getRegister().entrySet()) {
+            beanFactory.registerBeanDefinition(beanDefinitionEntry.getKey(), beanDefinitionEntry.getValue());
+        }
+
+        // 3.初始化bean
+        beanFactory.preInstantiateSingletons();
+
+        // 4.获取bean
+        HelloService helloWorldService = (HelloService) beanFactory.getBean("helloService");
+        helloWorldService.helloWorld();
     }
 
 }

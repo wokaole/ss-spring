@@ -2,8 +2,10 @@ package com.cold.spring.xml;
 
 import com.cold.spring.AbstractBeanDefinitionReader;
 import com.cold.spring.BeanDefinition;
+import com.cold.spring.BeanReference;
 import com.cold.spring.PropertyValue;
 import com.cold.spring.io.ResourceLoader;
+import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -78,7 +80,16 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader{
                 Element propertyEle = (Element) node;
                 String name = propertyEle.getAttribute("name");
                 String value = propertyEle.getAttribute("value");
-                beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name, value));
+                if (StringUtils.isNoneBlank(value)) {
+                    beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name, value));
+                } else {
+                    String ref = propertyEle.getAttribute("ref");
+                    if (StringUtils.isBlank(ref)) {
+                        throw new IllegalArgumentException("must specify a value or ref properties");
+                    }
+                    BeanReference beanReference = new BeanReference(ref);
+                    beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name, beanReference));
+                }
             }
         }
     }

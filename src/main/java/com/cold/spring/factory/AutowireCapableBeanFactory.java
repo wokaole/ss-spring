@@ -1,6 +1,7 @@
 package com.cold.spring.factory;
 
 import com.cold.spring.BeanDefinition;
+import com.cold.spring.BeanReference;
 import com.cold.spring.PropertyValues;
 
 import java.lang.reflect.Field;
@@ -19,6 +20,7 @@ public class AutowireCapableBeanFactory extends AbstractBeanFactory{
     protected Object doCreateBean(BeanDefinition beanDefinition) {
         Object instance = getInstance(beanDefinition);
         if (instance != null) {
+            beanDefinition.setBean(instance);
             applyPropertyValues(instance, beanDefinition.getPropertyValues());
         }
         return instance;
@@ -29,7 +31,12 @@ public class AutowireCapableBeanFactory extends AbstractBeanFactory{
             try {
                 Field field = bean.getClass().getDeclaredField(propertyValue.getName());
                 field.setAccessible(true);
-                field.set(bean, propertyValue.getValue());
+                Object value = propertyValue.getValue();
+                if (value instanceof BeanReference) {
+                    BeanReference beanReference = (BeanReference) value;
+                    value = getBean(beanReference.getName());
+                }
+                field.set(bean, value);
             } catch (NoSuchFieldException | IllegalAccessException e) {
                 e.printStackTrace();
             }
