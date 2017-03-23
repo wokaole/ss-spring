@@ -1,6 +1,6 @@
-package com.cold.spring.factory;
+package com.cold.spring.beans.factory;
 
-import com.cold.spring.BeanDefinition;
+import com.cold.spring.beans.BeanDefinition;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -17,7 +17,6 @@ public abstract class AbstractBeanFactory implements BeanFactory {
     private Map<String, BeanDefinition> beanMap = new ConcurrentHashMap<>();
     private final List<String> beanDefinitionNames = new ArrayList<String>();
 
-    @Override
     public void registerBeanDefinition(String beanName, BeanDefinition beanDefinition) {
         beanMap.put(beanName, beanDefinition);
         beanDefinitionNames.add(beanName);

@@ -1,10 +1,10 @@
-package com.cold.spring.xml;
+package com.cold.spring.beans.xml;
 
-import com.cold.spring.AbstractBeanDefinitionReader;
-import com.cold.spring.BeanDefinition;
-import com.cold.spring.BeanReference;
-import com.cold.spring.PropertyValue;
-import com.cold.spring.io.ResourceLoader;
+import com.cold.spring.beans.AbstractBeanDefinitionReader;
+import com.cold.spring.beans.BeanDefinition;
+import com.cold.spring.beans.BeanReference;
+import com.cold.spring.beans.PropertyValue;
+import com.cold.spring.beans.io.ResourceLoader;
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

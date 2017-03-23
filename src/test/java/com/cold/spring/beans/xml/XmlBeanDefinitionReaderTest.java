@@ -1,7 +1,7 @@
-package com.cold.spring.xml;
+package com.cold.spring.beans.xml;
 
-import com.cold.spring.BeanDefinition;
-import com.cold.spring.io.URLResourceLoader;
+import com.cold.spring.beans.BeanDefinition;
+import com.cold.spring.beans.io.URLResourceLoader;
 import junit.framework.Assert;
 import org.junit.Test;
 

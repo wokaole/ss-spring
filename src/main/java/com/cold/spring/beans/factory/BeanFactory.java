@@ -1,6 +1,5 @@
-package com.cold.spring.factory;
+package com.cold.spring.beans.factory;
 
-import com.cold.spring.BeanDefinition;
 
 /**
  * 解决 IoC 容器在 已经获取 Bean 的定义的情况下，如何装配、获取 Bean 实例 的问题
@@ -8,7 +7,6 @@ import com.cold.spring.BeanDefinition;
  * Created by faker on 2017/3/16.
  */
 public interface BeanFactory {
-    void registerBeanDefinition(String beanName, BeanDefinition beanDefinition);
 
     Object getBean(String beanName);
 }

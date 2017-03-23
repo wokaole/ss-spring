@@ -1,8 +1,8 @@
-package com.cold.spring.factory;
+package com.cold.spring.beans.factory;
 
-import com.cold.spring.BeanDefinition;
-import com.cold.spring.BeanReference;
-import com.cold.spring.PropertyValues;
+import com.cold.spring.beans.BeanDefinition;
+import com.cold.spring.beans.BeanReference;
+import com.cold.spring.beans.PropertyValues;
 
 import java.lang.reflect.Field;
 

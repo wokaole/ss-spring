@@ -1,4 +1,4 @@
-package com.cold.spring;
+package com.cold.spring.beans;
 
 /**
  * 类变量属性

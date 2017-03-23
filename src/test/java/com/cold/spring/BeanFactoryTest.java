@@ -1,9 +1,10 @@
 package com.cold.spring;
 
-import com.cold.spring.factory.AbstractBeanFactory;
-import com.cold.spring.factory.AutowireCapableBeanFactory;
-import com.cold.spring.io.URLResourceLoader;
-import com.cold.spring.xml.XmlBeanDefinitionReader;
+import com.cold.spring.beans.BeanDefinition;
+import com.cold.spring.beans.factory.AbstractBeanFactory;
+import com.cold.spring.beans.factory.AutowireCapableBeanFactory;
+import com.cold.spring.beans.io.URLResourceLoader;
+import com.cold.spring.beans.xml.XmlBeanDefinitionReader;
 import junit.framework.TestCase;
 import org.junit.Test;
 

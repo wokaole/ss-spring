@@ -1,4 +1,4 @@
-package com.cold.spring.io;
+package com.cold.spring.beans.io;
 
 
 import org.junit.Assert;

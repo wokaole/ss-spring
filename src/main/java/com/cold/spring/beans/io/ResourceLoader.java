@@ -1,4 +1,4 @@
-package com.cold.spring.io;
+package com.cold.spring.beans.io;
 
 /**
  * Created by faker on 2017/3/18.

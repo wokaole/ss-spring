@@ -1,6 +1,6 @@
-package com.cold.spring;
+package com.cold.spring.beans;
 
-import com.cold.spring.io.ResourceLoader;
+import com.cold.spring.beans.io.ResourceLoader;
 
 import java.util.HashMap;
 import java.util.Map;

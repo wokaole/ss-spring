@@ -1,4 +1,4 @@
-package com.cold.spring;
+package com.cold.spring.beans;
 
 /**
  * bean的内容及元数据，保存在BeanFactory中
