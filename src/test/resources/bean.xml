@@ -3,8 +3,13 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-    <bean name="helloService" class="com.cold.spring.HelloService">
+    <bean name="outputService" class="com.cold.spring.OutputService">
+        <property name="helloWorldService" ref="helloService"></property>
+    </bean>
+
+    <bean name="helloService" class="com.cold.spring.HelloServiceImpl">
         <property name="text" value="Hello World!"></property>
+        <property name="outputService" ref="outputService"></property>
     </bean>
 
 </beans>

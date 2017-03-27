@@ -28,7 +28,7 @@ public class BeanFactoryTest extends TestCase {
         }
 
         // 3.获取bean
-        HelloService helloWorldService = (HelloService) beanFactory.getBean("helloService");
+        HelloServiceImpl helloWorldService = (HelloServiceImpl) beanFactory.getBean("helloService");
         helloWorldService.helloWorld();
     }
 
@@ -48,7 +48,7 @@ public class BeanFactoryTest extends TestCase {
         beanFactory.preInstantiateSingletons();
 
         // 4.获取bean
-        HelloService helloWorldService = (HelloService) beanFactory.getBean("helloService");
+        HelloServiceImpl helloWorldService = (HelloServiceImpl) beanFactory.getBean("helloService");
         helloWorldService.helloWorld();
     }
 

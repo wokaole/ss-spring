@@ -7,14 +7,14 @@ import org.junit.Assert;
  */
 public class OutputService {
 
-    private HelloService helloWorldService;
+    private HelloServiceImpl helloWorldService;
 
     public void output(String text){
         Assert.assertNotNull(helloWorldService);
         System.out.println(text);
     }
 
-    public void setHelloWorldService(HelloService helloWorldService) {
+    public void setHelloWorldService(HelloServiceImpl helloWorldService) {
         this.helloWorldService = helloWorldService;
     }
 }
