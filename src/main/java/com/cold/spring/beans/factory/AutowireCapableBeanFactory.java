@@ -16,15 +16,6 @@ import java.lang.reflect.Field;
  * Created by faker on 2017/3/16.
  */
 public class AutowireCapableBeanFactory extends AbstractBeanFactory{
-    @Override
-    protected Object doCreateBean(BeanDefinition beanDefinition) {
-        Object instance = getInstance(beanDefinition);
-        if (instance != null) {
-            beanDefinition.setBean(instance);
-            applyPropertyValues(instance, beanDefinition.getPropertyValues());
-        }
-        return instance;
-    }
 
     private void applyPropertyValues(Object bean, PropertyValues propertyValues) {
         propertyValues.getValueList().forEach(propertyValue -> {
@@ -38,6 +29,8 @@ public class AutowireCapableBeanFactory extends AbstractBeanFactory{
                 }
                 field.set(bean, value);
             } catch (NoSuchFieldException | IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         });

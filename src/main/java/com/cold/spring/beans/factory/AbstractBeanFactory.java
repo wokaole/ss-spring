@@ -1,6 +1,7 @@
 package com.cold.spring.beans.factory;
 
 import com.cold.spring.beans.BeanDefinition;
+import com.cold.spring.beans.BeanPostProcessor;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,6 +17,7 @@ public abstract class AbstractBeanFactory implements BeanFactory {
 
     private Map<String, BeanDefinition> beanMap = new ConcurrentHashMap<>();
     private final List<String> beanDefinitionNames = new ArrayList<String>();
+    private List<BeanPostProcessor> beanPostProcessors = new ArrayList<BeanPostProcessor>();
 
     public void registerBeanDefinition(String beanName, BeanDefinition beanDefinition) {
         beanMap.put(beanName, beanDefinition);
@@ -30,7 +32,7 @@ public abstract class AbstractBeanFactory implements BeanFactory {
     }
 
     @Override
-    public Object getBean(String beanName) {
+    public Object getBean(String beanName) throws Exception {
         BeanDefinition beanDefinition = beanMap.get(beanName);
         if (beanDefinition == null) {
             throw new IllegalArgumentException("No bean named " + beanName + " is defined");
@@ -38,9 +40,47 @@ public abstract class AbstractBeanFactory implements BeanFactory {
         Object bean = beanDefinition.getBean();
         if (bean == null) {
             bean = doCreateBean(beanDefinition);
+            initializeBean(bean, beanName);
         }
         return bean;
     }
 
-    protected abstract Object doCreateBean(BeanDefinition beanDefinition);
+    protected void initializeBean(Object bean, String beanName) throws Exception {
+        for (BeanPostProcessor beanPostProcessor : beanPostProcessors) {
+            bean = beanPostProcessor.postProcessBeforeInitialization(bean, beanName);
+        }
+
+        // TODO:call initialize method
+        for (BeanPostProcessor beanPostProcessor : beanPostProcessors) {
+            bean = beanPostProcessor.postProcessAfterInitialization(bean, beanName);
+        }
+    }
+
+    protected Object doCreateBean(BeanDefinition beanDefinition) throws Exception {
+        Object bean = createBeanInstance(beanDefinition);
+        beanDefinition.setBean(bean);
+        applyPropertyValues(bean, beanDefinition);
+        return bean;
+    }
+
+    private void applyPropertyValues(Object bean, BeanDefinition beanDefinition) {
+    }
+
+    protected Object createBeanInstance(BeanDefinition beanDefinition) throws Exception {
+        return beanDefinition.getBeanClass().newInstance();
+    }
+
+    public void addBeanPostProcessor(BeanPostProcessor beanPostProcessor) throws Exception {
+        this.beanPostProcessors.add(beanPostProcessor);
+    }
+
+    public List getBeansForType(Class type) throws Exception {
+        List beans = new ArrayList<>();
+        for (String beanDefinitionName : beanDefinitionNames) {
+            if (type.isAssignableFrom(beanMap.get(beanDefinitionName).getBeanClass())) {
+                beans.add(getBean(beanDefinitionName));
+            }
+        }
+        return beans;
+    }
 }
