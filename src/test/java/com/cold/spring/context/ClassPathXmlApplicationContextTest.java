@@ -5,7 +5,7 @@ import com.cold.spring.HelloServiceImpl;
 import org.junit.Test;
 
 /**
- * @author liaowenhui
+ * @author faker
  * @date 2017/3/23 15:13.
  */
 public class ClassPathXmlApplicationContextTest {

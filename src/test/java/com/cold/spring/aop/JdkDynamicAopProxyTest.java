@@ -7,7 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * @author liaowenhui
+ * @author faker
  * @date 2017/3/27 17:44.
  */
 public class JdkDynamicAopProxyTest {

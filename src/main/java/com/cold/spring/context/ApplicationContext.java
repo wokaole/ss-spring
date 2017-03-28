@@ -10,7 +10,7 @@ import com.cold.spring.beans.factory.BeanFactory;
  * beanFactory通过读取BeanDefinition信息，实现bean的装配和获取
  *
  * ApplicationContext就是把两者结合起来，继承BeanFactory
- * @author liaowenhui
+ * @author faker
  * @date 2017/3/23 14:26.
  */
 public interface ApplicationContext extends BeanFactory{

@@ -12,7 +12,7 @@ import java.util.Map;
  *从xml加载配置进行bean设置的具体实现类
  * 内部通过 XmlBeanDefinitionReader 解析URLResourceLoader读取到的resource，
  * 获取beanDefinition信息，并保存到BeanFactory中
- * @author liaowenhui
+ * @author faker
  * @date 2017/3/23 14:51.
  */
 public class ClassPathXmlApplicationContext extends AbstractApplicationContext{

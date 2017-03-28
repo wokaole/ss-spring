@@ -4,7 +4,7 @@ import org.aopalliance.intercept.MethodInterceptor;
 
 /**
  * 代理相关的元数据
- * @author liaowenhui
+ * @author faker
  * @date 2017/3/27 16:52.
  */
 public class AdvisedSupport {

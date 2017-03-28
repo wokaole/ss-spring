@@ -2,7 +2,7 @@ package com.cold.spring.aop;
 
 /**
  * 被代理对象
- * @author liaowenhui
+ * @author faker
  * @date 2017/3/27 16:43.
  */
 public class TargetSource {
