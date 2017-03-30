@@ -11,22 +11,29 @@ public class AdvisedSupport {
 
     private TargetSource targetSource;
     private MethodInterceptor methodInterceptor;
+    private MethodMatcher methodMatcher;
 
     public TargetSource getTargetSource() {
         return targetSource;
     }
 
-    public AdvisedSupport setTargetSource(TargetSource targetSource) {
+    public void setTargetSource(TargetSource targetSource) {
         this.targetSource = targetSource;
-        return this;
     }
 
     public MethodInterceptor getMethodInterceptor() {
         return methodInterceptor;
     }
 
-    public AdvisedSupport setMethodInterceptor(MethodInterceptor methodInterceptor) {
+    public void setMethodInterceptor(MethodInterceptor methodInterceptor) {
         this.methodInterceptor = methodInterceptor;
-        return this;
+    }
+
+    public MethodMatcher getMethodMatcher() {
+        return methodMatcher;
+    }
+
+    public void setMethodMatcher(MethodMatcher methodMatcher) {
+        this.methodMatcher = methodMatcher;
     }
 }

@@ -1,20 +1,10 @@
 package com.cold.spring;
 
-import org.junit.Assert;
-
 /**
- * Created by faker on 2017/3/19.
+ * @author liaowenhui
+ * @date 2017/3/30 14:49.
  */
-public class OutputService {
+public interface OutputService {
 
-    private HelloServiceImpl helloWorldService;
-
-    public void output(String text){
-        Assert.assertNotNull(helloWorldService);
-        System.out.println(text);
-    }
-
-    public void setHelloWorldService(HelloServiceImpl helloWorldService) {
-        this.helloWorldService = helloWorldService;
-    }
+    void output(String text);
 }

@@ -1,6 +1,7 @@
 package com.cold.spring.context;
 
 
+import com.cold.spring.HelloService;
 import com.cold.spring.HelloServiceImpl;
 import org.junit.Test;
 
@@ -17,4 +18,10 @@ public class ClassPathXmlApplicationContextTest {
         helloService.helloWorld();
     }
 
+    @Test
+    public void testPostBeanProcessor() throws Exception {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("tinyioc-postbeanprocessor.xml");
+        HelloService helloWorldService = (HelloService) applicationContext.getBean("helloWorldService");
+        helloWorldService.helloWorld();
+    }
 }

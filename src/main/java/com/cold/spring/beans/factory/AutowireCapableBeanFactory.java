@@ -1,10 +1,13 @@
 package com.cold.spring.beans.factory;
 
+import com.cold.spring.aop.BeanFactoryAware;
 import com.cold.spring.beans.BeanDefinition;
 import com.cold.spring.beans.BeanReference;
+import com.cold.spring.beans.PropertyValue;
 import com.cold.spring.beans.PropertyValues;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 /**
  * 自动装配的 BeanFactory 实现了doCreateBean方法，该方法分3步：
@@ -17,23 +20,31 @@ import java.lang.reflect.Field;
  */
 public class AutowireCapableBeanFactory extends AbstractBeanFactory{
 
-    private void applyPropertyValues(Object bean, PropertyValues propertyValues) {
-        propertyValues.getValueList().forEach(propertyValue -> {
+    private void applyPropertyValues(Object bean, PropertyValues propertyValues) throws Exception {
+        if (bean instanceof BeanFactoryAware) {
+            ((BeanFactoryAware) bean).setBeanFactory(this);
+        }
+
+        for (PropertyValue propertyValue : propertyValues.getValueList()) {
+            Object value = propertyValue.getValue();
+            if (value instanceof BeanReference) {
+                BeanReference beanReference = (BeanReference) value;
+                value = getBean(beanReference.getName());
+            }
             try {
-                Field field = bean.getClass().getDeclaredField(propertyValue.getName());
-                field.setAccessible(true);
-                Object value = propertyValue.getValue();
-                if (value instanceof BeanReference) {
-                    BeanReference beanReference = (BeanReference) value;
-                    value = getBean(beanReference.getName());
-                }
-                field.set(bean, value);
-            } catch (NoSuchFieldException | IllegalAccessException e) {
-                e.printStackTrace();
+                Method declaredMethod = bean.getClass().getDeclaredMethod(
+                        "set" + propertyValue.getName().substring(0, 1).toUpperCase()
+                                + propertyValue.getName().substring(1), value.getClass());
+                declaredMethod.setAccessible(true);
+
+                declaredMethod.invoke(bean, value);
             } catch (Exception e) {
+                Field declaredField = bean.getClass().getDeclaredField(propertyValue.getName());
+                declaredField.setAccessible(true);
+                declaredField.set(bean, value);
                 e.printStackTrace();
             }
-        });
+        }
     }
 
     private Object getInstance(BeanDefinition beanDefinition) {

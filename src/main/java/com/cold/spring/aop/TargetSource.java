@@ -8,9 +8,9 @@ package com.cold.spring.aop;
 public class TargetSource {
 
     private Object target;
-    private Class targetClass;
+    private Class<?>[] targetClass;
 
-    public TargetSource(Object target, Class targetClass) {
+    public TargetSource(Object target, Class<?>[] targetClass) {
         this.target = target;
         this.targetClass = targetClass;
     }
@@ -19,7 +19,15 @@ public class TargetSource {
         return target;
     }
 
-    public Class getTargetClass() {
+    public void setTarget(Object target) {
+        this.target = target;
+    }
+
+    public Class<?>[] getTargetClass() {
         return targetClass;
+    }
+
+    public void setTargetClass(Class<?>[] targetClass) {
+        this.targetClass = targetClass;
     }
 }
