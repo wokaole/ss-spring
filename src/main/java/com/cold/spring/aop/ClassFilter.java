@@ -1,7 +1,7 @@
 package com.cold.spring.aop;
 
 /**
- * @author liaowenhui
+ * @author faker
  * @date 2017/3/28 19:39.
  */
 public interface ClassFilter {

@@ -10,6 +10,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * PointcutParser: 切入点解析，用于把表达式（execution(* com.cold.spring.*.*(..))）转换为PointcutExpression
+ * 转换为PointcutExpression：表示切入的表达式，用于判断切点是否符合表达式的切点
  * @author faker
  * @date 2017/3/28 19:36.
  */
@@ -19,7 +21,7 @@ public class AspectJExpressionPointcut implements ClassFilter, MethodMatcher, Po
     private String expression;
     private PointcutExpression pointcutExpression;
 
-    private static final Set<PointcutPrimitive> DEFAULT_SUPPORTED_PRIMITIVES = new HashSet<PointcutPrimitive>();
+    private static final Set<PointcutPrimitive> DEFAULT_SUPPORTED_PRIMITIVES = new HashSet<>();
     static {
         DEFAULT_SUPPORTED_PRIMITIVES.add(PointcutPrimitive.EXECUTION);
         DEFAULT_SUPPORTED_PRIMITIVES.add(PointcutPrimitive.ARGS);
