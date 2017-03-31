@@ -15,17 +15,16 @@ import java.lang.reflect.Proxy;
  * @author faker
  * @date 2017/3/27 15:33.
  */
-public class JdkDynamicAopProxy implements AopProxy, InvocationHandler{
+public class JdkDynamicAopProxy extends AbstractAopProxy implements InvocationHandler{
 
-    private AdvisedSupport advised;
 
     public JdkDynamicAopProxy(AdvisedSupport advised) {
-        this.advised = advised;
+        super(advised);
     }
 
     @Override
     public Object getProxy() {
-        return Proxy.newProxyInstance(getClass().getClassLoader(), advised.getTargetSource().getTargetClass(), this);
+        return Proxy.newProxyInstance(getClass().getClassLoader(), advised.getTargetSource().getInterfaces(), this);
     }
 
     @Override

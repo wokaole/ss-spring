@@ -1,7 +1,7 @@
 package com.cold.spring;
 
 /**
- * @author liaowenhui
+ * @author faker
  * @date 2017/3/30 14:49.
  */
 public interface OutputService {

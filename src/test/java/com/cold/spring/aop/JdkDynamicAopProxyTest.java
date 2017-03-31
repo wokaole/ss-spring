@@ -1,6 +1,7 @@
 package com.cold.spring.aop;
 
 import com.cold.spring.HelloService;
+import com.cold.spring.HelloServiceImpl;
 import com.cold.spring.context.ClassPathXmlApplicationContext;
 import org.junit.Test;
 
@@ -20,7 +21,7 @@ public class JdkDynamicAopProxyTest {
         // --------- helloWorldService with AOP
         // 1. 设置被代理对象(Joinpoint)
         AdvisedSupport support = new AdvisedSupport();
-        TargetSource targetSource = new TargetSource(helloService, HelloService.class);
+        TargetSource targetSource = new TargetSource(helloService, HelloServiceImpl.class, HelloService.class);
         support.setTargetSource(targetSource);
 
         // 2. 设置拦截器(Advice)

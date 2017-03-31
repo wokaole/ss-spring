@@ -11,14 +11,14 @@ import java.lang.reflect.Method;
  */
 public class ReflectiveMethodInvocation implements MethodInvocation{
 
-    private Object target;
-    private Method method;
-    private Object[] args;
+    protected Object target;
+    protected Method method;
+    protected Object[] arguments;
 
     public ReflectiveMethodInvocation(Object target, Method method, Object[] args) {
         this.target = target;
         this.method = method;
-        this.args = args;
+        this.arguments = args;
     }
 
     @Override
@@ -28,12 +28,12 @@ public class ReflectiveMethodInvocation implements MethodInvocation{
 
     @Override
     public Object[] getArguments() {
-        return args;
+        return arguments;
     }
 
     @Override
     public Object proceed() throws Throwable {
-        return method.invoke(target, args);
+        return method.invoke(target, arguments);
     }
 
     @Override
