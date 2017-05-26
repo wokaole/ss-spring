@@ -20,12 +20,12 @@ import java.lang.reflect.Method;
  */
 public class AutowireCapableBeanFactory extends AbstractBeanFactory{
 
-    private void applyPropertyValues(Object bean, PropertyValues propertyValues) throws Exception {
+    protected void applyPropertyValues(Object bean, BeanDefinition mbd) throws Exception {
         if (bean instanceof BeanFactoryAware) {
             ((BeanFactoryAware) bean).setBeanFactory(this);
         }
 
-        for (PropertyValue propertyValue : propertyValues.getValueList()) {
+        for (PropertyValue propertyValue : mbd.getPropertyValues().getValueList()) {
             Object value = propertyValue.getValue();
             if (value instanceof BeanReference) {
                 BeanReference beanReference = (BeanReference) value;

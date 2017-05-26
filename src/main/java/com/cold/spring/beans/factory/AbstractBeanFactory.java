@@ -16,8 +16,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public abstract class AbstractBeanFactory implements BeanFactory {
 
     private Map<String, BeanDefinition> beanMap = new ConcurrentHashMap<>();
-    private final List<String> beanDefinitionNames = new ArrayList<String>();
-    private List<BeanPostProcessor> beanPostProcessors = new ArrayList<BeanPostProcessor>();
+    private final List<String> beanDefinitionNames = new ArrayList<>();
+    private List<BeanPostProcessor> beanPostProcessors = new ArrayList<>();
 
     public void registerBeanDefinition(String beanName, BeanDefinition beanDefinition) {
         beanMap.put(beanName, beanDefinition);
@@ -65,7 +65,7 @@ public abstract class AbstractBeanFactory implements BeanFactory {
         return bean;
     }
 
-    private void applyPropertyValues(Object bean, BeanDefinition beanDefinition) {
+    protected void applyPropertyValues(Object bean, BeanDefinition mbd) throws Exception {
     }
 
     protected Object createBeanInstance(BeanDefinition beanDefinition) throws Exception {
